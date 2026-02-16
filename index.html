@@ -7,75 +7,98 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            background: #f8f9fa; 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* 渐变背景更高级 */
             font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            padding: 20px; /* 避免页面贴边 */
         }
         .container {
-            background: white;
-            padding: 40px 20px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95); /* 半透明白底更柔和 */
+            padding: 50px 30px;
+            border-radius: 20px; /* 更大圆角更圆润 */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); /* 更柔和的阴影 */
             text-align: center;
-            width: 90%;
-            max-width: 350px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #eee; /* 细边框增加层次感 */
+        }
+        /* 新增图标样式（模拟挪车图标，不用额外引入图片） */
+        .car-icon {
+            width: 80px;
+            height: 80px;
+            background: #409eff;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: white;
         }
         .title {
-            font-size: 20px;
-            color: #333;
-            margin-bottom: 10px;
+            font-size: 24px;
+            color: #303133;
+            margin-bottom: 15px;
+            font-weight: 600; /* 加粗标题 */
         }
         .desc {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 30px;
+            font-size: 15px;
+            color: #606266;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            padding: 0 10px;
         }
         .dial-btn {
-            background: #007bff;
+            background: linear-gradient(to right, #409eff, #66b1ff); /* 按钮渐变 */
             color: white;
             border: none;
-            border-radius: 8px;
-            padding: 15px 30px;
-            font-size: 18px;
+            border-radius: 50px; /* 胶囊按钮更美观 */
+            padding: 18px 30px;
+            font-size: 19px;
             cursor: pointer;
             width: 100%;
-            transition: background 0.3s;
+            transition: all 0.3s ease; /* 过渡更顺滑 */
+            box-shadow: 0 4px 12px rgba(64, 158, 255, 0.3); /* 按钮阴影 */
+            font-weight: 500;
         }
         .dial-btn:hover {
-            background: #0056b3;
+            background: linear-gradient(to right, #3399ff, #55aaff);
+            transform: translateY(-2px); /* 悬浮上移 */
+            box-shadow: 0 6px 16px rgba(64, 158, 255, 0.4);
         }
         .dial-btn:active {
-            background: #004085;
+            background: linear-gradient(to right, #2691ff, #449dff);
+            transform: translateY(0); /* 点击还原 */
+            box-shadow: 0 2px 8px rgba(64, 158, 255, 0.3);
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- 新增模拟挪车图标（用文字替代，无需图片） -->
+        <div class="car-icon">🚗</div>
         <h2 class="title">请联系车主挪车</h2>
-        <p class="desc">点击按钮一键拨号，保护双方隐私</p>
+        <p class="desc">点击下方按钮一键拨号，全程保护双方隐私，感谢您的配合～</p>
         <button class="dial-btn" id="dialBtn">一键联系车主</button>
     </div>
 
     <script>
-        // 替换成你的虚拟小号（重点改这里！）
-        const virtualPhone = '138xxxx8888'; 
+        // 替换成你的虚拟小号
+        const virtualPhone = '15526013050'; 
         
-        // 拨号逻辑（移动端触发系统拨号）
         document.getElementById('dialBtn').addEventListener('click', () => {
             if (!virtualPhone) {
                 alert("号码配置错误，请联系管理员");
                 return;
             }
-            // 移动端拨号API
             window.location.href = `tel:${virtualPhone}`;
-            // 提示语
             alert('正在为您转接车主，请稍候...');
         });
 
-        // 适配PC端（提示用手机打开）
+        // PC端提示
         if (!/Mobile|Android|iOS/.test(navigator.userAgent)) {
             document.getElementById('dialBtn').addEventListener('click', () => {
                 alert("请用手机扫码打开本页面，才能拨打电话哦～");
